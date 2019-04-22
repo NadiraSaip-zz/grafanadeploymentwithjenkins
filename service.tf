@@ -1,23 +1,21 @@
-resource "kubernetes_service" "grafana" {
+resource "kubernetes_service" "grafana-service" {
+  depends_on = ["kubernetes_secret.grafana-secrets"]  
   metadata {
-    name      = "grafana"
-    namespace = "tools"
-    labels {
-      app       = "grafana"
-      component = "core"
-    }
+    name      = "grafana-service"
+    namespace = "${var.namespace}"
   }
+
   spec {
+    selector {
+      app       = "grafana-deployment"
+    }
+
     port {
       protocol    = "TCP"
       port        = 80
-      target_port = "3000"
+      target_port = 3000
     }
-    selector {
-      app       = "grafana"
-      component = "core"
-    }
+    
     type = "LoadBalancer"
   }
 }
-
