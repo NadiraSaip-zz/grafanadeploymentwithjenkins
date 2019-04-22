@@ -12,7 +12,7 @@ node('master') {
     )])
     checkout scm
     stage('Generate Vars') {
-        def file = new File("${WORKSPACE}/grafanadeploymentwithjenkins/grafana.tfvars")
+        def file = new File("${WORKSPACE}/grafana.tfvars")
         file.write """
         password              =  "${password}"
         namespace             = "${namespace}"
@@ -20,18 +20,18 @@ node('master') {
         """
       }
     stage("Terraform init") {
-      dir("${workspace}/grafanadeploymentwithjenkins/") {
+      dir("${workspace}/") {
         sh "terraform init"
       }
     }
     stage('Terraform Apply/Plan') {
       if (params.terraformApply) {
-        dir("${WORKSPACE}/grafanadeploymentwithjenkins/") {
+        dir("${WORKSPACE}") {
           echo "##### Terraform Applying the Changes ####"
           sh "terraform apply  --auto-approve  -var-file=grafana.tfvars"
         }
     } else {
-        dir("${WORKSPACE}/grafanadeploymentwithjenkins/") {
+        dir("${WORKSPACE}/") {
           echo "##### Terraform Plan (Check) the Changes ####"
           sh "terraform plan -var-file=grafana.tfvars"
       } 
@@ -39,7 +39,7 @@ node('master') {
 }
     stage('Terraform Destoy') {
       if (params.terraformDestroy) {
-        dir("${WORKSPACE}/grafanadeploymentwithjenkins/") {
+        dir("${WORKSPACE}/") {
           echo "##### Terraform Destroying the Changes ####"
           sh "terraform destroy  --auto-approve  -var-file=grafana.tfvars"
         }
