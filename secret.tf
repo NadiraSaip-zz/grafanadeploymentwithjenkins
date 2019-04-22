@@ -1,6 +1,6 @@
-resource "kubernetes_secret" "grafana" {
+resource "kubernetes_secret" "grafana-secrets" {
   metadata {
-    name      = "grafana"
+    name      = "grafana-secrets"
     namespace = "${var.namespace}"
   }
   data {
