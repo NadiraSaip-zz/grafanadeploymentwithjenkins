@@ -3,11 +3,6 @@ package com.lib
 import groovy.json.JsonSlurper
 
 node('master') {
-  #!/usr/bin/env groovy
-package com.lib
-import groovy.json.JsonSlurper
-
-node('master') {
  properties([parameters([
     booleanParam(defaultValue: false, description: 'If you press this parameter it will apply all the changes', name: 'terraformApply'), 
     booleanParam(defaultValue: false, description: 'if you press this parameter it will destroy everything', name: 'terraformDestroy'), 
