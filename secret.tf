@@ -4,8 +4,8 @@ resource "kubernetes_secret" "grafana-secrets" {
     namespace = "${var.namespace}"
   }
   data {
-    admin-username = "admin"
-    admin-password = "${var.password}"
+    username = "admin"
+    password = "${var.password}"
   }
   type = "Opaque"
 }
