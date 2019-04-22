@@ -34,7 +34,6 @@ node('master') {
         dir("${WORKSPACE}/grafanadeploymentwithjenkins/") {
           echo "##### Terraform Plan (Check) the Changes ####"
           sh "terraform plan -var-file=grafana.tfvars"
-        }
       } 
     }
 }
