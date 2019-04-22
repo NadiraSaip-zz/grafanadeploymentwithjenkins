@@ -7,7 +7,7 @@ node('master') {
     booleanParam(defaultValue: false, description: 'If you press this parameter it will apply all the changes', name: 'terraformApply'), 
     booleanParam(defaultValue: false, description: 'if you press this parameter it will destroy everything', name: 'terraformDestroy'), 
     string(defaultValue: 'default_password', description: 'Please use password for the grafana user', name: 'Password', trim: true),
-    properties([parameters([string(defaultValue: 'test', description: 'please provide namespace', name: 'namespace', trim: true)
+    string(defaultValue: 'test', description: 'please provide namespace', name: 'namespace', trim: true)
     ]
     )])
     checkout scm
